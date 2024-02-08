@@ -4,7 +4,7 @@ import Image from "next/image";
 import Navbar from "./components/Navbar";
 import { useQuery } from "react-query";
 import axios from "axios";
-import { format, fromUnixTime, parseISO } from "date-fns";
+import { format, formatISO, fromUnixTime, parseISO } from "date-fns";
 import Container from "./components/Container";
 import { convertKelvinToFahrenheit } from "@/utils/convertKelvinToFarenheit";
 import WeatherIcon from "./components/WeatherIcon";
@@ -12,6 +12,7 @@ import { getAmOrPmIcon } from "@/utils/getAmOrPmIcon";
 import WeatherDetails from "./components/WeatherDetails";
 import { convertMetersToMiles } from "@/utils/convertMetersToMiles";
 import { convertToMph } from "@/utils/convertToMph";
+import ForecastWeatherDetails from "./components/ForecastWeatherDetails";
 
 type WeatherData = {
   cod: string;
@@ -79,11 +80,10 @@ export default function Home() {
       const { data } = await axios.get(
         `https://api.openweathermap.org/data/2.5/forecast?zip=32257&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}&cnt=56`
       );
+      console.log("data", data);
       return data;
     },
   });
-
-  console.log("data", data);
 
   if (isLoading)
     return (
@@ -94,7 +94,23 @@ export default function Home() {
 
   const todayData = data?.list[0];
 
-  console.log("data", todayData);
+  const uniqueDates = [
+    ...new Set(
+      data?.list.map(
+        (entry) => new Date(entry.dt * 1000).toISOString().split("T")[0]
+      )
+    ),
+  ];
+
+  const firstDataForEachDate = uniqueDates.map((date) => {
+    return data?.list.find((entry) => {
+      const entryDate = new Date(entry.dt * 1000).toISOString().split("T")[0];
+      const entryTime = new Date(entry.dt * 1000).getHours();
+      return entryDate === date && entryTime >= 6;
+    });
+  });
+
+  console.log("todayData", todayData);
 
   return (
     <div className="flex flex-col gap-4 bg-gray-100 min-h-screen">
@@ -191,6 +207,31 @@ export default function Home() {
         {/* 7 day forecast data */}
         <section className="flex w-full flex-col gap-4">
           <p className=" text-2xl">Forecast (7 days)</p>
+          {firstDataForEachDate.map((d, index) => (
+            <ForecastWeatherDetails
+              key={index}
+              description={d?.weather[0].description ?? ""}
+              weatherIcon={d?.weather[0].icon ?? "01d"}
+              date={format(parseISO(d?.dt_txt ?? ""), "dd.MM")}
+              day={format(parseISO(d?.dt_txt ?? ""), "EEEE")}
+              temp={d?.main.temp ?? 0}
+              feels_like={d?.main.feels_like ?? 0}
+              temp_max={d?.main.temp_max ?? 0}
+              temp_min={d?.main.temp_min ?? 0}
+              airPressure={`${d?.main.pressure ?? 0} hPa`}
+              humidity={`${d?.main.humidity ?? 0}%`}
+              sunrise={format(
+                fromUnixTime(data?.city.sunrise ?? 1702517657),
+                "H:mm"
+              )}
+              sunset={format(
+                fromUnixTime(data?.city.sunset ?? 1702517657),
+                "H:mm"
+              )}
+              visibility={`${convertMetersToMiles(d?.visibility ?? 0)}`}
+              windSpeed={`${convertToMph(d?.wind.speed ?? 0)}`}
+            />
+          ))}
         </section>
       </main>
     </div>
