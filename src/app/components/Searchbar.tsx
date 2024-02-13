@@ -8,20 +8,15 @@ type Props = {
   className?: string;
   value: string;
   onChange: React.ChangeEventHandler<HTMLInputElement> | undefined;
-  onSubmit: React.FormEventHandler<HTMLButtonElement> | undefined;
-};
-
-type Event = {
-  preventDefault: any;
+  onSubmit: React.FormEventHandler<HTMLFormElement> | undefined;
 };
 
 export default function Searchbar(props: Props) {
-  const handleSubmit = (event: Event) => {
-    event.preventDefault();
-    return null;
-  };
   return (
-    <form className="flex relative items-center justify-center h-10">
+    <form
+      className="flex relative items-center justify-center h-10"
+      onSubmit={props.onSubmit}
+    >
       <input
         type="text"
         onChange={props.onChange}
@@ -31,10 +26,7 @@ export default function Searchbar(props: Props) {
           "px-4 py-2 w-[230px] border border-gray-300 rounded-l-md focus:outline-none focus:border-blue-500 h-full"
         )}
       />
-      <button
-        onSubmit={props.onSubmit}
-        className="px-4 py-[9px] bg-blue-500 text-white rounded-r-md focus:outline-none hover:bg-blue-600 h-full"
-      >
+      <button className="px-4 py-[9px] bg-blue-500 text-white rounded-r-md focus:outline-none hover:bg-blue-600 h-full">
         <IoSearch />
       </button>
     </form>
