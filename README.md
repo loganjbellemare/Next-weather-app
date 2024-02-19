@@ -69,16 +69,16 @@ If anyone would be interested, I'm thinking about adding the ability to toggle b
 
 Let me know what you want to see!
 
-## Tech Stack [get icons]
+## Tech Stack
 
-- ![Next.js 14](https://static-00.iconduck.com/assets.00/nextjs-icon-512x309-yynfidez.png)
-- ![React](https://github.com/FortAwesome/Font-Awesome/blob/6.x/svgs/brands/react.svg)
-- ![Typescript](https://static-00.iconduck.com/assets.00/typescript-icon-icon-1024x1024-vh3pfez8.png)
-- ![OpenWeatherMap API](https://openweathermap.org/themes/openweathermap/assets/img/mobile_app/android-app-top-banner.png)
-- ![Tailwind CSS](https://static-00.iconduck.com/assets.00/tailwind-css-icon-2048x1229-u8dzt4uh.png)
-- ![React Icons](https://raw.githubusercontent.com/react-icons/react-icons/master/react-icons.svg)
-- ![React Query](https://img.stackshare.io/service/25599/default_c6db7125f2c663e452ba211df91b2ced3bb7f0ff.png)
-- ![date-fns](https://avatars.githubusercontent.com/u/14921202?s=200&v=4)
-- ![jotai](https://cdn.candycode.com/jotai/jotai-mascot.png)
-- ![axios](https://user-images.githubusercontent.com/8939680/57233884-20344080-6fe5-11e9-8df3-0df1282e1574.png)
+- Next.js 14
+- React
+- Typescript
+- Tailwind CSS
+- [OpenWeatherMap API](https://openweathermap.org/)
+- [React Icons](https://github.com/react-icons/react-icons)
+- [Tanstack Query](https://github.com/TanStack/query)
+- [date-fns](https://github.com/date-fns/date-fns)
+- [jotai](https://github.com/pmndrs/jotai)
+- [axios](https://github.com/axios/axios)
 - [clsx](https://github.com/lukeed/clsx)
