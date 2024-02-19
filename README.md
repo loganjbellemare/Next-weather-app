@@ -2,7 +2,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 # Next.js Weather App
 
-This project was an exercise in developing using Next.js, Typescript, and Tailwind CSS, and managing global state with [Jotai](https://github.com/pmndrs/jotai). The app features a dynamic display of the user's forecast, and location can be set to anywhere on the globe!
+This project was an exercise in developing using Next.js, Typescript, and Tailwind CSS, and managing global state with [Jotai](https://github.com/pmndrs/jotai). The app features a dynamic display of the user's forecast, and location can be set to anywhere on the globe! Deployed site can be viewed [here](https://next-weather-app-loganjbellemare.vercel.app/)!
 
 ![screenshot of main page UI](./screenshots/main-UI.png)
 
